@@ -4,7 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>心理測驗網站</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #3a6186, #89253e);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        button {
+            background-color: #00796b;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #004d40;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -13,26 +67,76 @@
     </header>
 
     <div class="container">
-        <p>如果你進入一座森林，你會首先注意到什麼？</p>
-        <form id="quiz-form">
-            <div>
-                <input type="radio" id="option1" name="forest" value="1">
-                <label for="option1">陽光穿透樹葉的光影</label>
-            </div>
-            <div>
-                <input type="radio" id="option2" name="forest" value="2">
-                <label for="option2">森林裡的安靜聲音</label>
-            </div>
-            <div>
-                <input type="radio" id="option3" name="forest" value="3">
-                <label for="option3">地上的落葉和花朵</label>
-            </div>
-            <button type="button" onclick="showResult()">查看結果</button>
-        </form>
-
-        <div class="result" id="result"></div>
+        <div id="question-container">
+            <p id="question">如果你進入一座森林，你會首先注意到什麼？</p>
+            <form id="quiz-form">
+                <div>
+                    <input type="radio" id="option1" name="answer" value="1">
+                    <label for="option1">陽光穿透樹葉的光影</label>
+                </div>
+                <div>
+                    <input type="radio" id="option2" name="answer" value="2">
+                    <label for="option2">森林裡的安靜聲音</label>
+                </div>
+                <div>
+                    <input type="radio" id="option3" name="answer" value="3">
+                    <label for="option3">地上的落葉和花朵</label>
+                </div>
+                <button type="button" onclick="nextQuestion()">下一題</button>
+            </form>
+        </div>
+        <div class="result hidden" id="result"></div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        const questions = [
+            "如果你進入一座森林，你會首先注意到什麼？",
+            "你更喜歡哪種天氣？",
+            "在朋友聚會中，你通常扮演什麼角色？",
+            "你最喜歡的休閒活動是什麼？",
+            "當你感到壓力時，你會怎麼處理？"
+        ];
+
+        const options = [
+            ["陽光穿透樹葉的光影", "森林裡的安靜聲音", "地上的落葉和花朵"],
+            ["晴朗的藍天", "涼爽的雨天", "下雪的白色世界"],
+            ["領導大家的角色", "安靜聆聽的角色", "調節氣氛的角色"],
+            ["看書或聽音樂", "運動或健身", "與朋友聊天"],
+            ["深呼吸與冥想", "與人傾訴", "嘗試轉移注意力"]
+        ];
+
+        let currentQuestionIndex = 0;
+        const questionElement = document.getElementById("question");
+        const formElement = document.getElementById("quiz-form");
+        const resultDiv = document.getElementById("result");
+        const questionContainer = document.getElementById("question-container");
+
+        function nextQuestion() {
+            const selectedOption = document.querySelector('input[name="answer"]:checked');
+
+            if (!selectedOption) {
+                alert("請選擇一個選項！");
+                return;
+            }
+
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < questions.length) {
+                // 更新問題和選項
+                questionElement.textContent = questions[currentQuestionIndex];
+                const inputs = formElement.querySelectorAll("input[name='answer']");
+                const labels = formElement.querySelectorAll("label");
+                for (let i = 0; i < inputs.length; i++) {
+                    inputs[i].checked = false; // 清除之前的選項
+                    labels[i].textContent = options[currentQuestionIndex][i];
+                }
+            } else {
+                // 顯示結果
+                questionContainer.classList.add("hidden");
+                resultDiv.classList.remove("hidden");
+                resultDiv.textContent = "測驗完成！感謝你的參與。";
+            }
+        }
+    </script>
 </body>
 </html>
