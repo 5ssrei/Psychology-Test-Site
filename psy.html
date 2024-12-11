@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心理測驗網站</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #f8efd4, #d1c4b6);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        button {
+            background-color: #7e57c2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #5e35b1;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>心理測驗網站</h1>
+        <p>測試你的內心世界！</p>
+    </header>
+
+    <div class="container">
+        <p>如果你進入一座森林，你會首先注意到什麼？</p>
+        <form id="quiz-form">
+            <div>
+                <input type="radio" id="option1" name="forest" value="1">
+                <label for="option1">陽光穿透樹葉的光影</label>
+            </div>
+            <div>
+                <input type="radio" id="option2" name="forest" value="2">
+                <label for="option2">森林裡的安靜聲音</label>
+            </div>
+            <div>
+                <input type="radio" id="option3" name="forest" value="3">
+                <label for="option3">地上的落葉和花朵</label>
+            </div>
+            <button type="button" onclick="showResult()">查看結果</button>
+        </form>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function showResult() {
+            const resultDiv = document.getElementById('result');
+            const selectedOption = document.querySelector('input[name="forest"]:checked');
+
+            if (!selectedOption) {
+                resultDiv.textContent = '請選擇一個選項！';
+                resultDiv.style.color = 'red';
+                return;
+            }
+
+            const value = selectedOption.value;
+            let result = '';
+
+            switch (value) {
+                case '1':
+                    result = '你是一個樂觀、注重美感的人，喜歡享受生活的小確幸。';
+                    break;
+                case '2':
+                    result = '你是一個內向而富有哲思的人，喜歡沉浸在自己的世界中。';
+                    break;
+                case '3':
+                    result = '你是一個細心且溫柔的人，對身邊的小細節特別敏感。';
+                    break;
+                default:
+                    result = '發生錯誤，請再試一次！';
+            }
+
+            resultDiv.textContent = result;
+            resultDiv.style.color = 'green';
+        }
+    </script>
+</body>
+</html>
