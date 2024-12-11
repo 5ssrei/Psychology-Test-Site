@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心理測驗網站</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>心理測驗網站</h1>
+        <p>測試你的內心世界！</p>
+    </header>
+
+    <div class="container">
+        <p>如果你進入一座森林，你會首先注意到什麼？</p>
+        <form id="quiz-form">
+            <div>
+                <input type="radio" id="option1" name="forest" value="1">
+                <label for="option1">陽光穿透樹葉的光影</label>
+            </div>
+            <div>
+                <input type="radio" id="option2" name="forest" value="2">
+                <label for="option2">森林裡的安靜聲音</label>
+            </div>
+            <div>
+                <input type="radio" id="option3" name="forest" value="3">
+                <label for="option3">地上的落葉和花朵</label>
+            </div>
+            <button type="button" onclick="showResult()">查看結果</button>
+        </form>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
