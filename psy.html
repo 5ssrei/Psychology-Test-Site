@@ -4,57 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>心理測驗網站</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, #f8efd4, #d1c4b6);
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
-
-        header {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            text-align: center;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            width: 90%;
-            max-width: 600px;
-            text-align: center;
-        }
-
-        button {
-            background-color: #7e57c2;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 20px;
-        }
-
-        button:hover {
-            background-color: #5e35b1;
-        }
-
-        .result {
-            margin-top: 20px;
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
@@ -83,37 +33,6 @@
         <div class="result" id="result"></div>
     </div>
 
-    <script>
-        function showResult() {
-            const resultDiv = document.getElementById('result');
-            const selectedOption = document.querySelector('input[name="forest"]:checked');
-
-            if (!selectedOption) {
-                resultDiv.textContent = '請選擇一個選項！';
-                resultDiv.style.color = 'red';
-                return;
-            }
-
-            const value = selectedOption.value;
-            let result = '';
-
-            switch (value) {
-                case '1':
-                    result = '你是一個樂觀、注重美感的人，喜歡享受生活的小確幸。';
-                    break;
-                case '2':
-                    result = '你是一個內向而富有哲思的人，喜歡沉浸在自己的世界中。';
-                    break;
-                case '3':
-                    result = '你是一個細心且溫柔的人，對身邊的小細節特別敏感。';
-                    break;
-                default:
-                    result = '發生錯誤，請再試一次！';
-            }
-
-            resultDiv.textContent = result;
-            resultDiv.style.color = 'green';
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
