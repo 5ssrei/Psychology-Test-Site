@@ -105,7 +105,17 @@
             ["深呼吸與冥想", "與人傾訴", "嘗試轉移注意力"]
         ];
 
+        const results = [
+            "你是一個樂觀、注重美感的人，喜歡享受生活的小確幸。",
+            "你是一個內向而富有哲思的人，喜歡沉浸在自己的世界中。",
+            "你是一個細心且溫柔的人，對身邊的小細節特別敏感。",
+            "你是一個天生的領導者，擁有很強的責任感。",
+            "你是一個樂觀向上的人，擅長化壓力為動力。"
+        ];
+
         let currentQuestionIndex = 0;
+        let selectedAnswers = [];
+
         const questionElement = document.getElementById("question");
         const formElement = document.getElementById("quiz-form");
         const resultDiv = document.getElementById("result");
@@ -119,6 +129,7 @@
                 return;
             }
 
+            selectedAnswers.push(parseInt(selectedOption.value));
             currentQuestionIndex++;
 
             if (currentQuestionIndex < questions.length) {
@@ -131,11 +142,25 @@
                     labels[i].textContent = options[currentQuestionIndex][i];
                 }
             } else {
-                // 顯示結果
-                questionContainer.classList.add("hidden");
-                resultDiv.classList.remove("hidden");
-                resultDiv.textContent = "測驗完成！感謝你的參與。";
+                // 計算結果
+                const resultIndex = calculateResult();
+                showResult(resultIndex);
             }
+        }
+
+        function calculateResult() {
+            // 計算結果邏輯（簡單示例：根據選擇第一個答案次數）
+            const counts = [0, 0, 0];
+            selectedAnswers.forEach(answer => {
+                counts[answer - 1]++;
+            });
+            return counts.indexOf(Math.max(...counts));
+        }
+
+        function showResult(resultIndex) {
+            questionContainer.classList.add("hidden");
+            resultDiv.classList.remove("hidden");
+            resultDiv.textContent = results[resultIndex];
         }
     </script>
 </body>
